@@ -49,6 +49,8 @@ const server = http.createServer((req, res) => {
         // voy a contestar al cliente diciéndole que he recibido su petición 
         // 1. Voy a indicar que el tipo de información que voy a enviar es texto plano
         res.write("<h1>ey! el servidor NodeJS ha recibido tu petición! Vamos por buen camino. Hola Eva!</h1>");
+        res.write("<script>console.log('Yo soy código que me ejecuto en el cliente (navegador). Mira la consola del Chrome!')</script>");
+
         res.end()
     }
 });
