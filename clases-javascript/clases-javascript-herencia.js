@@ -76,8 +76,8 @@ console.log(hitler);
 
 // Usar el método estático para comparar dos animales
 const compare_1 = Animal.compareLifeExpectancy(alejandro, loki);
-console.log("Alejandor sanz y loki" , compare_1); // 1
+console.log("Alejandor sanz y loki", compare_1); // 1
 
 // Comparar a Alejandro sanz y a Hitler
 const compare_2 = Animal.compareLifeExpectancy(alejandro, hitler);
-console.log("Alejandor sanz y Hitler" , compare_2); // 0
+console.log("Alejandor sanz y Hitler", compare_2); // 0

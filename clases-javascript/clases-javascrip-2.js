@@ -24,9 +24,14 @@ class Medallero {
 
 
 // Crear una instancia de la clase Medallero para España que ha ganado 3 medallas
+const medalleroSinClase = {
+    nombre: "Nigeria",
+    numMedallas: 77
+}
 const medalleroEspaña = new Medallero("España", 3);
+console.log(medalleroSinClase);
 medalleroEspaña.incrementarMedalla();
 console.log(medalleroEspaña);
 
-const medalleroChina = new Medallero("China", 17);
-console.log(medalleroChina)
+// const medalleroChina = new Medallero("China", 17);
+// console.log(medalleroChina)
