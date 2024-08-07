@@ -9,14 +9,37 @@ async function main() {
     // Crear esquema
      /** Los usuarios tienen un nombre, apellidos y fecha de nacimiento. Queremos también vamos a guardar la forma de contacto que es a través de un teléfono y su email. También vamos a guardar el nombre de los cursos que ha cursado hasta el momento. */
     const studentSchema = new mongoose.Schema({
-        name: String,
-        lastName: String,
+        name: {
+            type: String,
+            required: true
+        },
+        lastName: {
+            type: String,
+            required: [true, "We need the last name to register the user"]
+        },
         birthDate: Date,
         contact: {
-            phone: String,
-            email: String
+            phone: {
+                type: String,
+                required: [true, 'The phone field is mandatory'],
+                validate: {
+                    validator: function (v) {
+                        // Valida que el teléfono tenga un formato simple
+                        return /^[\d\s\-\+\(\)]{7,15}$/.test(v);
+                    },
+                    message: 'The phone number is invalid'
+                }
+            },
+            email: {
+                type: String,
+                required: [true, 'Email is mandatory'],
+                match: [/.+@.+\..+/, 'The email is invalid']
+            }
         },
-        finishedCourses: [String]
+        finishedCourses: {
+            type: [String],
+            default: [] // la palabra default establece un valor por defecto para el documento en caso de que el usuario no informe
+        }
     })
 
     // Relacionar esquema con un modelo
@@ -35,7 +58,11 @@ async function main() {
     })
 
     // Guardar al usuario en la base de datos
-    matias.save();
+    try {
+       await matias.save();
+    } catch(err){
+        console.log('Ha ocurrido un error al guardar el documento', err.message)
+    }
 
     // Info confirmación
     console.log('Usuario guardado correctamente');
